@@ -1,0 +1,2 @@
+include 'core', 'desktop', 'ios'
+rootProject.name = 'projectOop'
