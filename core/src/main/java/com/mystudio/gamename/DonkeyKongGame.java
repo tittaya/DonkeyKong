@@ -7,7 +7,7 @@ import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.game.BasicGame;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
-
+import static com.mystudio.gamename.Variable.*;
 import java.awt.*;
 
 
@@ -23,7 +23,6 @@ public class DonkeyKongGame extends BasicGame  {
 	private CollisionBox[] gameObjCollisionBox;
 	private GameObject[] gameObj;
 
-
 	@Override
     public void initialise() {
         kongGraphic = new Texture("Monkey.png");
@@ -34,9 +33,11 @@ public class DonkeyKongGame extends BasicGame  {
         man = new Man(manSprite);
         groundGraphic = new Texture("Ground2.png");
         groundSprite = new Sprite(groundGraphic);
-        ground = new Floor(groundSprite,50,700);
-//        gameObjCollisionBox[0] = ground.getCollisionBox();
-//        gameObj[0] = ground;
+        ground = new Floor(groundSprite,50,700, 1000, 200);
+        gameObjCollisionBox = new CollisionBox[MAX_OBJ];
+        gameObj = new GameObject[MAX_OBJ];
+        gameObjCollisionBox[0] = ground.getCollisionBox();
+        gameObj[0] = ground;
 
 
         MyInputProcessor inputProcessor = new MyInputProcessor(Kong, man);
@@ -51,7 +52,7 @@ public class DonkeyKongGame extends BasicGame  {
         man.update();
         Kong.monkeyMove();
         man.manMove();
-//        for(int i = 0; i< gameObjCollisionBox.length ; i++) {
+//        for(int i = 0; i< MAX_OBJ ; i++) {
 //            if (checkCollision(Kong.getMonkeyBox(),gameObjCollisionBox[i])){
 //                GameObject temp = gameObj[i];
 //                if(temp.getObjectIndex() == 1){
@@ -82,7 +83,7 @@ public class DonkeyKongGame extends BasicGame  {
     }
 
     public boolean checkCollision (CollisionBox a,CollisionBox b){
-	    if(a.intersects(b)){ return true; }
+	    if(a.getPolygon().intersects(b.getPolygon())){ return true; }
         else return false;
     }
 }

@@ -16,4 +16,8 @@ public class GameObject extends Rectangle {
     public int getObjectIndex() {
         return objectIndex;
     }
+    public Sprite getSprite() {
+        return sprite;
+    }
+
 }
