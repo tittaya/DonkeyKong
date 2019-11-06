@@ -3,9 +3,12 @@ package com.mystudio.gamename;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.game.BasicGame;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
+
+import java.awt.*;
 
 
 public class DonkeyKongGame extends BasicGame  {
@@ -17,11 +20,10 @@ public class DonkeyKongGame extends BasicGame  {
 	private Monkey Kong;
 	private Man man;
 	private Floor ground;
+	private CollisionBox[] gameObjCollisionBox;
+	private GameObject[] gameObj;
 
 
-
-
-	
 	@Override
     public void initialise() {
         kongGraphic = new Texture("Monkey.png");
@@ -33,6 +35,8 @@ public class DonkeyKongGame extends BasicGame  {
         groundGraphic = new Texture("Ground2.png");
         groundSprite = new Sprite(groundGraphic);
         ground = new Floor(groundSprite,50,700);
+//        gameObjCollisionBox[0] = ground.getCollisionBox();
+//        gameObj[0] = ground;
 
 
         MyInputProcessor inputProcessor = new MyInputProcessor(Kong, man);
@@ -43,18 +47,27 @@ public class DonkeyKongGame extends BasicGame  {
     
     @Override
     public void update(float delta) {
-//	    ground.update();
         Kong.update();
         man.update();
         Kong.monkeyMove();
         man.manMove();
-
+//        for(int i = 0; i< gameObjCollisionBox.length ; i++) {
+//            if (checkCollision(Kong.getMonkeyBox(),gameObjCollisionBox[i])){
+//                GameObject temp = gameObj[i];
+//                if(temp.getObjectIndex() == 1){
+//                    Kong.setOnFloor(true);
+//                    Kong.monkeyMove();
+//                }
+//            }else{
+//                Kong.monkeyMove();
+//            }
+//
+//        }
 
     }
     
     @Override
     public void interpolate(float alpha) {
-//	    ground.interpolate(alpha);
         Kong.interpolate(alpha);
         man.interpolate(alpha);
     }
@@ -66,5 +79,10 @@ public class DonkeyKongGame extends BasicGame  {
         man.render(g);
         ground.render(g);
 
+    }
+
+    public boolean checkCollision (CollisionBox a,CollisionBox b){
+	    if(a.intersects(b)){ return true; }
+        else return false;
     }
 }

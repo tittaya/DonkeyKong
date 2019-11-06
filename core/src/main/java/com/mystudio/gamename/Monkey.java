@@ -1,26 +1,25 @@
 package com.mystudio.gamename;
 
-import org.mini2Dx.core.engine.geom.CollisionPoint;
+import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
-
 import java.awt.*;
-
-import static com.mystudio.gamename.Variable.GRAVITY;
+import static com.mystudio.gamename.Variable.*;
 
 /**
  * Kong (Player)
  */
-public  class Monkey extends Rectangle {
+public  class Monkey extends Rectangle  {
     private boolean onLadder;
     private boolean onFloor;
     private boolean A_Pressed;
     private boolean D_Pressed;
     private boolean W_Pressed;
     private boolean S_Pressed;
-    private int monkeySpeed_X = 10;
-    private int monkeySpeed_Y = 3;
-    private CollisionPoint point;
+    private float monkeySpeed_X = 10;
+    private float monkeySpeed_Y = 3;
+//    private CollisionPoint point;
+    private CollisionBox monkeyBox;
     private  Sprite sprite;
 
     /**
@@ -28,9 +27,13 @@ public  class Monkey extends Rectangle {
      * @param sprite
      */
     public Monkey(Sprite sprite){
-        point = new CollisionPoint();
+        monkeyBox = new CollisionBox(0,0,300,300);
         this.sprite = sprite;
-        point.set(0,0);
+        this.sprite.setSize(300,300);
+    }
+
+    public CollisionBox getMonkeyBox() {
+        return monkeyBox;
     }
 
     /**
@@ -61,53 +64,74 @@ public  class Monkey extends Rectangle {
         onLadder = t;
     }
 
+//    public void collision(){
+//        if()
+//    }
+
     /**
      * Control Player's movement.
      * if player doesn't stand on floor, player will fall down to the ground.
      */
     public void monkeyMove(){
 //        point.set(point.getX(),point.getY() + GRAVITY *1f);
-        if(A_Pressed){
-            point.set(point.getX() - monkeySpeed_X *1f, point.getY());
+        if(onFloor) {
+            if (A_Pressed && onFloor) {
+                monkeyBox.set(monkeyBox.getX() - monkeySpeed_X * 1f, monkeyBox.getY());
+            }
+            if (!A_Pressed && onFloor) {
+                monkeyBox.set(monkeyBox.getX(), monkeyBox.getY());
+            }
+            if (D_Pressed) {
+                monkeyBox.set(monkeyBox.getX() + monkeySpeed_X * 1f, monkeyBox.getY());
+            }
+            if (!D_Pressed) {
+                monkeyBox.set(monkeyBox.getX(), monkeyBox.getY());
+            }
+            if (W_Pressed){
+                monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+            }
+            if(!W_Pressed){
+                monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+            }
+            if(S_Pressed){
+                monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+            }
+            if(!S_Pressed){
+                monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+            }
         }
-        if(!A_Pressed) {
-            point.set(point.getX() , point.getY());
+        if(!onFloor){
+            monkeyBox.set(monkeyBox.getX(),monkeyBox.getY() + GRAVITY *1f);
         }
-        if(D_Pressed){
-            point.set(point.getX() + monkeySpeed_X *1f, point.getY());
-        }
-        if(!D_Pressed){
-            point.set(point.getX() , point.getY());
-        }
-        if(W_Pressed && D_Pressed){
-            point.set(point.getX() + monkeySpeed_X *0.5f, point.getY() - monkeySpeed_Y *1f);
-        }
-        if(W_Pressed && A_Pressed){
-            point.set(point.getX() - monkeySpeed_X *0.5f, point.getY() - monkeySpeed_Y *1f);
-        }
-        if(!W_Pressed){
-            point.set(point.getX() , point.getY());
-        }
-        if(S_Pressed){
-            point.set(point.getX() , point.getY() + monkeySpeed_Y *1f);
-        }
-        if(!S_Pressed){
-            point.set(point.getX() , point.getY());
-        }
+//        if(W_Pressed && D_Pressed){
+//            monkeyBox.set(monkeyBox.getX() + monkeySpeed_X *0.5f, monkeyBox.getY() - monkeySpeed_Y *1f);
+//        }
+//        if(W_Pressed && A_Pressed){
+//            monkeyBox.set(monkeyBox.getX() - monkeySpeed_X *0.5f, monkeyBox.getY() - monkeySpeed_Y *1f);
+//        }
+//        if(!W_Pressed){
+//            monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+//        }
+//        if(S_Pressed){
+//            monkeyBox.set(monkeyBox.getX() , monkeyBox.getY() + monkeySpeed_Y *1f);
+//        }
+//        if(!S_Pressed){
+//            monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+//        }
     }
 
 
     public void update() {
-        point.preUpdate();
+        monkeyBox.preUpdate();
     }
 
     public void interpolate(float alpha) {
-        point.interpolate(null, alpha);
+        monkeyBox.interpolate(null, alpha);
 
     }
 
     public void render(Graphics g) {
-        g.drawSprite(sprite, point.getRenderX(), point.getRenderY());
+        g.drawSprite(sprite, monkeyBox.getRenderX(), monkeyBox.getRenderY());
     }
 
 
