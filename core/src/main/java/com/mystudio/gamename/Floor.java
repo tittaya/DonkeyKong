@@ -16,6 +16,7 @@ public class Floor extends GameObject {
     public Floor(Sprite sprite, float x, float y, float width, float height){
         collisionBox = new CollisionBox(x,y,width,height);
         this.sprite = sprite;
+        this.sprite.setSize(width,height);
     }
 
     public CollisionBox getCollisionBox() {

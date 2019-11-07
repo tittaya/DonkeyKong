@@ -27,9 +27,9 @@ public  class Monkey extends Rectangle  {
      * @param sprite
      */
     public Monkey(Sprite sprite){
-        monkeyBox = new CollisionBox(0,0,300,300);
+        monkeyBox = new CollisionBox(0,0,200,170);
         this.sprite = sprite;
-        this.sprite.setSize(300,300);
+        this.sprite.setSize(200,200);
     }
 
     public CollisionBox getMonkeyBox() {
@@ -65,16 +65,16 @@ public  class Monkey extends Rectangle  {
         onLadder = t;
     }
 
-//    public void collision(){
-//        if()
-//    }
-
+    public void checkFloor(CollisionBox a,CollisionBox b){
+        if((a.getY()+a.getHeight()) >= b.getY()){ setOnFloor(true); }
+        else setOnFloor(false);
+    }
     /**
      * Control Player's movement.
      * if player doesn't stand on floor, player will fall down to the ground.
      */
     public void monkeyMove(){
-//        point.set(point.getX(),point.getY() + GRAVITY *1f);
+
         if(onFloor) {
             if (A_Pressed && onFloor) {
                 monkeyBox.set(monkeyBox.getX() - monkeySpeed_X * 1f, monkeyBox.getY());
