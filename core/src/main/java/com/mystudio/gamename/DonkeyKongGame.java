@@ -7,6 +7,8 @@ import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.game.BasicGame;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
+import org.w3c.dom.Text;
+
 import static com.mystudio.gamename.Variable.*;
 import java.awt.*;
 
@@ -17,7 +19,7 @@ public class DonkeyKongGame extends BasicGame  {
     //-----------------------------------
 	private Texture texture;
 	private Sprite kongSprite, manSprite, groundSprite, floor1Sprite;
-	private Texture kongGraphic, manGraphic, groundGraphic, floor1Graphic;
+	private Texture kongGraphic, manGraphic, groundGraphic, floor1Graphic,background;
 	private Monkey Kong;
 	private Man man;
 	private Floor ground, floor1;
@@ -26,6 +28,9 @@ public class DonkeyKongGame extends BasicGame  {
 
 	@Override
     public void initialise() {
+	    background = new Texture("");
+
+
         kongGraphic = new Texture("Monkey.png");
         kongSprite = new Sprite(kongGraphic);
         Kong = new Monkey(kongSprite);
