@@ -25,7 +25,7 @@ public class DonkeyKongGame extends BasicGame  {
 
 	@Override
     public void initialise() {
-        kongGraphic = new Texture("Monkey.png");
+        kongGraphic = new Texture("Kong1.png");
         kongSprite = new Sprite(kongGraphic);
         Kong = new Monkey(kongSprite);
 
@@ -35,7 +35,7 @@ public class DonkeyKongGame extends BasicGame  {
 
         groundGraphic = new Texture("Ground3.png");
         groundSprite = new Sprite(groundGraphic);
-        ground = new Floor(groundSprite,0,800, 1500, 200);
+        ground = new Floor(groundSprite,0,800, 1300, 200);
 
         floor1Graphic = new Texture("floor2.png");
         floor1Sprite = new Sprite(floor1Graphic);

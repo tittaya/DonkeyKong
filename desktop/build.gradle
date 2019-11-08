@@ -1,4 +1,5 @@
-import groovy.xml.*;
+import java.lang.Object;
+groovy.util.XmlNodePrinter
 apply plugin: "application"
 
 sourceCompatibility = 1.7

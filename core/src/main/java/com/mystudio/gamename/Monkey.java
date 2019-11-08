@@ -25,9 +25,11 @@ public  class Monkey extends Rectangle  {
     /**
      *
      * @param sprite
+     * create monkey
+     * set sprite's size, collisionBox's size and position
      */
     public Monkey(Sprite sprite){
-        monkeyBox = new CollisionBox(0,0,200,170);
+        monkeyBox = new CollisionBox(0,0,200,200);
         this.sprite = sprite;
         this.sprite.setSize(200,200);
     }
