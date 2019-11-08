@@ -14,6 +14,7 @@ import java.awt.*;
 public class DonkeyKongGame extends BasicGame  {
 	public static final String GAME_IDENTIFIER = "com.mystudio.gamename";
 
+    //-----------------------------------
 	private Texture texture;
 	private Sprite kongSprite, manSprite, groundSprite, floor1Sprite;
 	private Texture kongGraphic, manGraphic, groundGraphic, floor1Graphic;
