@@ -12,12 +12,13 @@ import static com.mystudio.gamename.Variable.*;
 public  class Monkey extends Rectangle  {
     private boolean onLadder;
     private boolean onFloor;
+    private boolean canJump;
     private boolean A_Pressed;
     private boolean D_Pressed;
     private boolean W_Pressed;
     private boolean S_Pressed;
     private float monkeySpeed_X = 10;
-    private float monkeySpeed_Y = 3;
+    private float monkeySpeed_Y = 5;
 //    private CollisionPoint point;
     private CollisionBox monkeyBox;
     private  Sprite sprite;
@@ -40,7 +41,7 @@ public  class Monkey extends Rectangle  {
 
 
     /**
-     *
+     * Setter
      * @param t the element to be insert
      */
     public void setA_Pressed(boolean t) {
@@ -67,31 +68,53 @@ public  class Monkey extends Rectangle  {
         onLadder = t;
     }
 
-    public void checkFloor(CollisionBox a,CollisionBox b){
-        if((a.getY()+a.getHeight()) >= b.getY()){ setOnFloor(true); }
-        else setOnFloor(false);
-    }
+    public void setCanJump(boolean t) { canJump = t; }
+
     /**
      * Control Player's movement.
      * if player doesn't stand on floor, player will fall down to the ground.
      */
     public void monkeyMove(){
+        float x = monkeyBox.getX();
+        float y = monkeyBox.getY();
+        if(onFloor ) {
 
-        if(onFloor) {
-            if (A_Pressed && onFloor) {
-                monkeyBox.set(monkeyBox.getX() - monkeySpeed_X * 1f, monkeyBox.getY());
+            if (A_Pressed) {
+                monkeyBox.setX(x -= monkeySpeed_X);
+//                monkeyBox.set(monkeyBox.getX() - monkeySpeed_X * 1f, monkeyBox.getY());
             }
-            if (!A_Pressed && onFloor) {
+            if (!A_Pressed) {
                 monkeyBox.set(monkeyBox.getX(), monkeyBox.getY());
             }
             if (D_Pressed) {
-                monkeyBox.set(monkeyBox.getX() + monkeySpeed_X * 1f, monkeyBox.getY());
+                monkeyBox.setX(x += monkeySpeed_X);
+//                monkeyBox.set(monkeyBox.getX() + monkeySpeed_X * 1f, monkeyBox.getY());
             }
             if (!D_Pressed) {
                 monkeyBox.set(monkeyBox.getX(), monkeyBox.getY());
             }
-            if (W_Pressed){
-                monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+//            if (W_Pressed){
+//                for(int i=0; i<15 ; i++) {
+//                    monkeyBox.set(monkeyBox.getX(), y -= monkeySpeed_Y);
+//                }
+////                this.setOnFloor(false);
+//            }
+            if (W_Pressed && D_Pressed){
+                for(int i=0; i<10 ; i++) {
+                    monkeyBox.set(x += monkeySpeed_X, y -= monkeySpeed_Y);
+                    if(monkeyBox.getY()  == y+10) {
+                        for(int j=0; j<10 ; j++) {
+                            monkeyBox.set(x += monkeySpeed_X, y += monkeySpeed_Y);
+                        }
+                    }
+                }
+            }
+            if (W_Pressed && A_Pressed){
+                for(int i=0; i<10 ; i++) {
+                    monkeyBox.set(x -= monkeySpeed_X, y -= monkeySpeed_Y);
+                }
+//                this.setOnFloor(false);
+
             }
             if(!W_Pressed){
                 monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
@@ -106,6 +129,7 @@ public  class Monkey extends Rectangle  {
         if(!onFloor){
             monkeyBox.set(monkeyBox.getX(),monkeyBox.getY() + GRAVITY *1f);
         }
+
 //        if(W_Pressed && D_Pressed){
 //            monkeyBox.set(monkeyBox.getX() + monkeySpeed_X *0.5f, monkeyBox.getY() - monkeySpeed_Y *1f);
 //        }
