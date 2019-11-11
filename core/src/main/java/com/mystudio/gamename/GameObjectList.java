@@ -16,9 +16,7 @@ public class GameObjectList {
     public static Floor ground = new Floor(groundSprite, 0, 800, 1300, 200);
     public static Floor floor1 =  new Floor(floor1Sprite, 0, 300, 800, 100);
 
-    public static GameObject[] gameObj = new GameObject[MAX_OBJ];
-    public gameObj[0] = ground;
-    public gameObj[1] = floor1;
+    
 
 
 
