@@ -8,18 +8,20 @@ import org.mini2Dx.core.game.BasicGame;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 import static com.mystudio.gamename.Variable.*;
+import static com.mystudio.gamename.GameObjectList.*;
 import java.awt.*;
 
 
 public class DonkeyKongGame extends BasicGame {
     public static final String GAME_IDENTIFIER = "com.mystudio.gamename";
 
-    private Texture texture;
-    private Sprite kongSprite, manSprite, groundSprite, floor1Sprite;
-    private Texture kongGraphic, manGraphic, groundGraphic, floor1Graphic, bgTexture;
+    private Sprite kongSprite, manSprite;
+//    private Sprite groundSprite, floor1Sprite;
+    private Texture kongGraphic, manGraphic;
+//    private Texture  groundGraphic, floor1Graphic, bgTexture;
     private Monkey Kong;
     private Man man;
-    private Floor ground, floor1;
+//    private Floor ground, floor1;
     private GameObject[] gameObj;
 
     @Override
@@ -35,13 +37,13 @@ public class DonkeyKongGame extends BasicGame {
         manSprite = new Sprite(manGraphic);
         man = new Man(manSprite);
 
-        groundGraphic = new Texture("Ground3.png");
-        groundSprite = new Sprite(groundGraphic);
-        ground = new Floor(groundSprite, 0, 800, 1300, 200);
+//        groundGraphic = new Texture("Ground3.png");
+//        groundSprite = new Sprite(groundGraphic);
+//        ground = new Floor(groundSprite, 0, 800, 1300, 200);
 
-        floor1Graphic = new Texture("floor2.png");
-        floor1Sprite = new Sprite(floor1Graphic);
-        floor1 = new Floor(floor1Sprite, 0, 300, 800, 100);
+//        floor1Graphic = new Texture("floor2.png");
+//        floor1Sprite = new Sprite(floor1Graphic);
+//        floor1 = new Floor(floor1Sprite, 0, 300, 800, 100);
 
         gameObj = new GameObject[MAX_OBJ];
 
@@ -81,7 +83,6 @@ public class DonkeyKongGame extends BasicGame {
     @Override
     public void render(Graphics g) {
         g.drawTexture(bgTexture, 0, 0);
-//        g.setBackgroundColor(Color.WHITE);
         Kong.render(g);
         man.render(g);
         ground.render(g);
