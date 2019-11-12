@@ -11,20 +11,19 @@ public class GameObject extends Rectangle {
     private Sprite sprite;
     private int objectIndex;
 
-    public CollisionBox getCollisionBox() {
-        return collisionBox;
-    }
-    public int getObjectIndex() {
-        return objectIndex;
-    }
-    public Sprite getSprite() {
-        return sprite;
-    }
+    /**
+     * getter
+     */
+    public CollisionBox getCollisionBox() { return collisionBox; }
+    public int getObjectIndex() { return objectIndex; }
+    public Sprite getSprite() { return sprite; }
 
     public void update() {
         collisionBox.preUpdate();
     }
-    public void interpolate(float alpha) { collisionBox.interpolate(null, alpha); }
+    public void interpolate(float alpha) {
+        collisionBox.interpolate(null, alpha);
+    }
     public void render(Graphics g){
         g.drawSprite(sprite, collisionBox.getX(), collisionBox.getY());
     }

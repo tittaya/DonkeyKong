@@ -18,40 +18,42 @@ public class Man extends Rectangle {
     private CollisionBox manBox;
     private  Sprite sprite;
 
+    /**
+     *
+     * @param sprite
+     * create man
+     * set sprite's size, collisionBox's size and position.
+     */
     public Man(Sprite sprite){
         manBox = new CollisionBox(500,600,80,150);
         this.sprite = sprite;
         this.sprite.setSize(80,150);
     }
 
-    public CollisionBox getManBox() {
-        return manBox;
-    }
+    /**
+     * Getter
+     */
+    public CollisionBox getManBox() { return manBox; }
 
-    public void setLeft_Pressed(boolean t){
-        Left_Pressed = t;
-    }
+    /**
+     * Setter
+     */
+    public void setLeft_Pressed(boolean t){ Left_Pressed = t; }
 
-    public void setRight_Pressed(boolean t) {
-        Right_Pressed = t;
-    }
+    public void setRight_Pressed(boolean t) { Right_Pressed = t; }
 
-    public void setUp_Pressed(boolean t) {
-        Up_Pressed = t;
-    }
+    public void setUp_Pressed(boolean t) { Up_Pressed = t; }
 
-    public void setDown_Pressed(boolean t) {
-        Down_Pressed = t;
-    }
+    public void setDown_Pressed(boolean t) { Down_Pressed = t; }
 
-    public void setOnFloor(boolean t) {
-        this.onFloor = t;
-    }
+    public void setOnFloor(boolean t) { this.onFloor = t; }
 
-    public void setOnLadder(boolean t) {
-        this.onLadder = t;
-    }
+    public void setOnLadder(boolean t) { this.onLadder = t; }
 
+    /**
+     * Control Player's movement.
+     * if player doesn't stand on floor, player will fall down to the ground.
+     */
     public void manMove(){
         if(onFloor) {
             if (Left_Pressed) {

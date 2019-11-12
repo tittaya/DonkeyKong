@@ -19,7 +19,6 @@ public  class Monkey extends Rectangle  {
     private boolean S_Pressed;
     private float monkeySpeed_X = 10;
     private float monkeySpeed_Y = 5;
-//    private CollisionPoint point;
     private CollisionBox monkeyBox;
     private  Sprite sprite;
 
@@ -27,7 +26,7 @@ public  class Monkey extends Rectangle  {
      *
      * @param sprite
      * create monkey
-     * set sprite's size, collisionBox's size and position
+     * set sprite's size, collisionBox's size and position.
      */
     public Monkey(Sprite sprite){
         monkeyBox = new CollisionBox(0,0,200,200);
@@ -35,6 +34,9 @@ public  class Monkey extends Rectangle  {
         this.sprite.setSize(200,200);
     }
 
+    /**
+     * Getter
+     */
     public CollisionBox getMonkeyBox() {
         return monkeyBox;
     }
@@ -42,7 +44,6 @@ public  class Monkey extends Rectangle  {
 
     /**
      * Setter
-     * @param t the element to be insert
      */
     public void setA_Pressed(boolean t) {
         A_Pressed = t;

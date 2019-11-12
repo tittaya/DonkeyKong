@@ -13,9 +13,9 @@ public class MyInputProcessor implements InputProcessor {
     }
 
     /**
-     *
-     * @param keycode
-     * @return
+     * player move when key down.
+     * press W,A,S,D to control monkey.
+     * press Left,Right,Up,Down to control man.
      */
     public boolean keyDown (int keycode) {
         switch (keycode)
@@ -48,6 +48,9 @@ public class MyInputProcessor implements InputProcessor {
         return true;
     }
 
+    /**
+     * player stop moving when key up.
+     */
     public boolean keyUp (int keycode) {
         switch (keycode)
         {
