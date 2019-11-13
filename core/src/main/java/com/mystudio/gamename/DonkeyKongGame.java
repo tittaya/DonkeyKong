@@ -1,7 +1,6 @@
 package com.mystudio.gamename;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.game.BasicGame;
@@ -9,7 +8,6 @@ import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
 import static com.mystudio.gamename.Variable.*;
 import static com.mystudio.gamename.GameObjectList.*;
-import java.awt.*;
 
 
 public class DonkeyKongGame extends BasicGame {
@@ -37,13 +35,6 @@ public class DonkeyKongGame extends BasicGame {
         manSprite = new Sprite(manGraphic);
         man = new Man(manSprite);
 
-//        groundGraphic = new Texture("Ground3.png");
-//        groundSprite = new Sprite(groundGraphic);
-//        ground = new Floor(groundSprite, 0, 800, 1300, 200);
-
-//        floor1Graphic = new Texture("floor2.png");
-//        floor1Sprite = new Sprite(floor1Graphic);
-//        floor1 = new Floor(floor1Sprite, 0, 300, 800, 100);
 
         gameObj = new GameObject[MAX_OBJ];
 
@@ -60,15 +51,16 @@ public class DonkeyKongGame extends BasicGame {
     public void update(float delta) {
         Kong.update();
         man.update();
-        if(checkCollision(Kong.getMonkeyBox(),gameObj)){
-            Kong.setOnFloor(true);
-            Kong.setCanJump(true);
-        }else{
-            Kong.setOnFloor(false);
+        if(Kong.jump) {
+            if (checkCollision(Kong.getMonkeyBox(), gameObj)) {
+
+                Kong.setOnFloor(true);
+                Kong.setCanJump(true);
+            } else {
+                Kong.setOnFloor(false);
+            }
         }
         Kong.monkeyMove();
-//        Kong.monkeyMove();
-//        man.manMove();
 
 
 
