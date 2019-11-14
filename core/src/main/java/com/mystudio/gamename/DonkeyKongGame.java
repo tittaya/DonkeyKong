@@ -49,8 +49,8 @@ public class DonkeyKongGame extends BasicGame {
 
     @Override
     public void update(float delta) {
-        Kong.update();
-        man.update();
+//        Kong.update();
+//        man.update();
         if(Kong.jump) {
             if (checkCollision(Kong.getMonkeyBox(), gameObj)) {
 
@@ -60,7 +60,10 @@ public class DonkeyKongGame extends BasicGame {
                 Kong.setOnFloor(false);
             }
         }
-        Kong.monkeyMove();
+        Kong.monkeyMove(delta);
+        Kong.update();
+        man.update();
+
 
 
 
