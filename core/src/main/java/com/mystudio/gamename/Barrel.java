@@ -3,6 +3,7 @@ package com.mystudio.gamename;
 import org.mini2Dx.core.engine.geom.CollisionBox;
 import org.mini2Dx.core.graphics.Graphics;
 import org.mini2Dx.core.graphics.Sprite;
+import org.mini2Dx.core.graphics.Texture;
 
 import java.awt.*;
 
