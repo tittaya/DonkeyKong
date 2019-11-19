@@ -9,12 +9,14 @@ import static com.mystudio.gamename.Variable.*;
 public class Man extends Rectangle {
     private boolean onLadder;
     private boolean onFloor;
+    private boolean canJump;
+    public boolean jump = true;
     private boolean Left_Pressed;
     private boolean Right_Pressed;
     private boolean Up_Pressed;
     private boolean Down_Pressed;
-    private float manSpeed_X = 10;
-    private float manSpeed_Y = 3;
+    private float manSpeed_X = 500;
+    private float manSpeed_Y = 250;
     private CollisionBox manBox;
     private  Sprite sprite;
 
@@ -50,40 +52,100 @@ public class Man extends Rectangle {
 
     public void setOnLadder(boolean t) { this.onLadder = t; }
 
+    public void setCanJump(boolean t) { canJump = t; }
+
     /**
      * Control Player's movement.
      * if player doesn't stand on floor, player will fall down to the ground.
      */
-    public void manMove(){
-        if(onFloor) {
-            if (Left_Pressed) {
-                manBox.set(manBox.getX() - manSpeed_X*1f, manBox.getY());
-            }
-            if (!Left_Pressed) {
-                manBox.set(manBox.getX(), manBox.getY());
-            }
-            if (Right_Pressed) {
-                manBox.set(manBox.getX() + manSpeed_X*1f, manBox.getY());
-            }
-            if (!Right_Pressed) {
-                manBox.set(manBox.getX(), manBox.getY());
+    public void manMove(float delta){
+        float x_box = manBox.getX();
+        float y_box = manBox.getY();
+        float oldY = manBox.getY();
+        if (onFloor && Left_Pressed) {
+
+            manBox.setX(x_box -= manSpeed_X*delta);
+        }
+        /*if (onFloor && !A_Pressed) {
+
+            monkeyBox.set(monkeyBox.getX(), monkeyBox.getY());
+        }*/
+        if (onFloor && Right_Pressed) {
+
+            manBox.setX(x_box += manSpeed_X*delta);
+        }
+        /*if (onFloor && !D_Pressed) {
+
+            monkeyBox.set(monkeyBox.getX(), monkeyBox.getY());
+        }*/
+        if (onFloor && Up_Pressed){
+            for(int i=0; i<15  ; i++) {
+                manBox.set(manBox.getX(), y_box -= manSpeed_Y*delta);
             }
         }
+
+        if (onFloor && Up_Pressed && Right_Pressed){
+            System.out.println(oldY);
+            jump = false;
+            for (int i = 0; i < 10; i++) {
+                System.out.println("in loop jump up");
+                manBox.set(x_box += manSpeed_X * delta, y_box -= manSpeed_Y * delta);
+                System.out.println("jump up" + manBox.getX() + " " + manBox.getY());
+            }
+            Up_Pressed = false;
+            Right_Pressed = false;
+            float newX_box = manBox.getX();
+            float newY_box = manBox.getY();
+
+
+            while (newY_box!=oldY) {
+                System.out.println("in loop jump down");
+                newX_box += manSpeed_X * delta;
+                newY_box += manSpeed_Y * delta;
+                manBox.set(newX_box,newY_box);
+                System.out.println("jump down" + manBox.getX() + " " + manBox.getY());
+            }
+            jump = true;
+        }
+
+
+        if (Up_Pressed && Left_Pressed){
+            jump = false;
+            for (int i = 0; i < 10; i++) {
+                System.out.println("in loop jump up");
+                manBox.set(x_box -= manSpeed_X * delta, y_box -= manSpeed_Y * delta);
+                System.out.println("jump up" + manBox.getX() + " " + manBox.getY());
+            }
+            Up_Pressed = false;
+            Right_Pressed = false;
+            float newX_box = manBox.getX();
+            float newY_box = manBox.getY();
+
+
+            while (newY_box!=oldY) {
+                System.out.println("in loop jump down");
+                newX_box -= manSpeed_X * delta;
+                newY_box += manSpeed_Y * delta;
+                manBox.set(newX_box,newY_box);
+                System.out.println("jump down" + manBox.getX() + " " + manBox.getY());
+            }
+            jump = true;
+
+        }
+            /*if(!W_Pressed){
+                monkeyBox.set(monkeyBox.getX() , monkeyBox.getY());
+            }*/
+        if(Down_Pressed){
+            manBox.set(manBox.getX() , manBox.getY());
+        }
+        if(!Down_Pressed){
+            manBox.set(manBox.getX() , manBox.getY());
+        }
+
         if(!onFloor){
-            manBox.set(manBox.getX(), manBox.getY()+ GRAVITY *1f);
+            manBox.set(manBox.getX(),manBox.getY() + ((manSpeed_Y*delta) + ((5/10)*GRAVITY*(delta*delta))));
+            System.out.println(manBox.getX()+" "+manBox.getY());
         }
-//        if(Up_Pressed){
-//            manBox.set(manBox.getX() , manBox.getY() - 5f);
-//        }
-//        if(!Up_Pressed){
-//            manBox.set(manBox.getX() , manBox.getY());
-//        }
-//        if(Down_Pressed){
-//            manBox.set(manBox.getX() , manBox.getY() + 5f);
-//        }
-//        if(!Down_Pressed){
-//            manBox.set(manBox.getX() , manBox.getY());
-//        }
     }
 
     public void update() {

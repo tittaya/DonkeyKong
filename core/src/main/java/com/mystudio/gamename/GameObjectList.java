@@ -12,11 +12,14 @@ public class GameObjectList {
     public static Texture  bgTexture = new Texture("bg2.png");
     public static Texture groundGraphic = new Texture("Ground3.png");
     public static Texture  floor1Graphic = new Texture("floor2.png");
+    public static Texture barrel = new Texture("barrel1.png");
 
     public static Sprite  groundSprite = new Sprite(groundGraphic);
     public static Sprite floor1Sprite = new Sprite(floor1Graphic);
+    public static Sprite barrelSprite = new Sprite(barrel);
 
     public static Floor ground = new Floor(groundSprite, 0, 800, 1300, 200);
     public static Floor floor1 =  new Floor(floor1Sprite, 0, 300, 800, 100);
+    public static Barrel barrel1 = new Barrel(barrelSprite,0,700,100,100);
 
 }

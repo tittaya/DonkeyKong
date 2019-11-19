@@ -40,6 +40,7 @@ public class DonkeyKongGame extends BasicGame {
 
         gameObj[0] = ground;
         gameObj[1] = floor1;
+//        gameObj[2] = ground;
 
         MyInputProcessor inputProcessor = new MyInputProcessor(Kong, man);
         Gdx.input.setInputProcessor(inputProcessor);
@@ -51,15 +52,32 @@ public class DonkeyKongGame extends BasicGame {
     public void update(float delta) {
 //        Kong.update();
 //        man.update();
-        if(Kong.jump) {
-            if (checkCollision(Kong.getMonkeyBox(), gameObj)) {
+        if(Kong.jump || man.jump) {
 
+            if (checkCollision(Kong.getMonkeyBox(), gameObj)) {
                 Kong.setOnFloor(true);
                 Kong.setCanJump(true);
             } else {
                 Kong.setOnFloor(false);
             }
+
+            if (checkCollision(man.getManBox(), gameObj)) {
+                man.setOnFloor(true);
+                man.setCanJump(true);
+            } else {
+                Kong.setOnFloor(false);
+            }
+
+            if (checkCollision(barrel1.getCollisionBox(), gameObj)) {
+                barrel1.setOnFloor(true);
+            } else {
+                barrel1.setOnFloor(false);
+            }
+
+
         }
+        barrel1.barrelMove(delta);
+        man.manMove(delta);
         Kong.monkeyMove(delta);
         Kong.update();
         man.update();
@@ -82,6 +100,7 @@ public class DonkeyKongGame extends BasicGame {
         man.render(g);
         ground.render(g);
         floor1.render(g);
+        barrel1.render(g);
 
 
     }
@@ -100,7 +119,35 @@ public class DonkeyKongGame extends BasicGame {
         }
         return false;
     }
+    public boolean check1(CollisionBox a, GameObject[] b) {
+            GameObject x = b[0];
+            if (x != null) {
+                if(a.intersects(x.getCollisionBox())){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        return false;
+    }
+
+    public boolean check2(CollisionBox a, GameObject[] b) {
+        GameObject x = b[1];
+        if (x != null) {
+            if(a.intersects(x.getCollisionBox())){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        return false;
+    }
+
 }
+
+
 
 //	    if(a.getPolygon().intersects(b.getPolygon())){ return true; }
 //        else return false;
