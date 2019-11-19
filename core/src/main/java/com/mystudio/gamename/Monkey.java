@@ -122,6 +122,7 @@ public  class Monkey extends Rectangle  {
                 monkeyBox.set(newX_box,newY_box);
                 System.out.println("jump down" + monkeyBox.getX() + " " + monkeyBox.getY());
             }
+            jump = true;
         }
 
 
@@ -145,6 +146,7 @@ public  class Monkey extends Rectangle  {
                     monkeyBox.set(newX_box,newY_box);
                     System.out.println("jump down" + monkeyBox.getX() + " " + monkeyBox.getY());
                 }
+                jump = true;
 
             }
             /*if(!W_Pressed){
